@@ -5,7 +5,7 @@
   } from 'nanoid'
   import Header from "./components/Header.svelte";
   import NotesItem from "./notes/NotesItem.svelte";
-      import Button from "./components/Button.svelte";
+  import Button from "./components/Button.svelte";
   export let showAddNoteModal = false;
   export let showDeleteNoteModal = false;
   
@@ -22,16 +22,11 @@
   let notes = JSON.parse(localStorage.getItem("notes") || "[]");
   let selectedLayout;
 
-  // if(selectedLayout !== undefined){
-  //  localStorage.setItem("layout" , selectedLayout)
-  //   }
-  // $:{
-  //   if(selectedLayout !== undefined){
-  //     selectedLayout = localStorage.getItem("layout" , selectedLayout)
-  //   }
-  // }
-  
-  
+
+  let layoutVal = localStorage.getItem("layout")
+
+  // let testClass = localStorage.getItem('layout');
+
   
   function addNewNote(event) {
           let newNote = {
@@ -55,13 +50,16 @@
   </script>
   <Header bind:selectedLayout/>
   <div class="notes-wrapper container {selectedLayout}" >
-     <div class="add-note">
+    
         <button class="add-note-btn" id="add-note-btn" on:click={() => {
         showAddNoteModal = true
         }}>
-        <i class="fa fa-solid fa-plus"></i>
+         <div class="add-note">
+          <i class="fa fa-solid fa-plus"></i>
+         </div>
+      
         </button>
-     </div>
+     
      <NotesItem {notes} {showDeleteNoteModal} on:cancels={cancelModal} />
   </div>
   {#if showAddNoteModal} 
@@ -73,6 +71,12 @@
   @use "../src/assets/scss/fonts/_fonts.scss" as *;
   @use "../src/assets/scss/variables/variables" as *;
   @use "../src/assets/scss/mixins/mixins" as *;
+
+  button{
+    background-color: transparent;
+  }
+
+ 
   .container {
     width: calc(100vw - 100px);
   }
@@ -86,6 +90,7 @@
     display: grid;
     grid-template-columns: auto auto auto auto auto;
     grid-gap: 1rem;
+    width: 100%;
   
     &.container {
       padding: $container-padding;
@@ -105,14 +110,19 @@
           border: $border-none;
           outline: none;
           box-shadow: $bx-shadow-none;
+          background-color: transparent;
   
-          .fa {
-            font-size: $fs-2_5;
-            color: $text-white;
-          }
+
         }
         /** End of note btn **/
       }
+      .fa {
+            font-size: $fs-3_5;
+            color: $text-white;
+            background-color:$color-red;
+            padding: $p-1;
+            border-radius: 50%;
+          }
       /** End of add note **/
     }
   

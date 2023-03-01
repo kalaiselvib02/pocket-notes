@@ -12,6 +12,10 @@
 
     const dispatch = new createEventDispatcher();
 
+    const BUTTON_LABELS = APP_CONSTANTS.MODAL_DATA.ADD_NOTE.BUTTON_LABELS;
+    const ADD_NOTE = APP_CONSTANTS.MODAL_DATA.ADD_NOTE;
+    const ERROR_MESSAGES = APP_CONSTANTS.ERROR_MESSAGES.ADD_NOTE;
+
     let title = "";
     let titleRequired = false;
     let titleMaxLengthRequired = false;
@@ -21,9 +25,9 @@
     let selectedColor = "";
 
     $: titleRequired = !checkEmpty(title);
-    $: titleMaxLengthRequired = !checkLength(title , 60) ;
+    $: titleMaxLengthRequired = !checkLength(title , ERROR_MESSAGES.NOTE_TITLE.TITLE_MAX_LENGTH) ;
     $: descriptionRequired = !checkEmpty(description);
-    $: descriptionMaxLengthRequired = !checkLength(description , 255) ;
+    $: descriptionMaxLengthRequired = !checkLength(description , ERROR_MESSAGES.NOTE_DESCRIPTION.DESCRIPTION_MAX_LENGTH) ;
     $: isFormValid = titleRequired && titleMaxLengthRequired && descriptionRequired && descriptionMaxLengthRequired
 
 
@@ -41,7 +45,7 @@
 
 </script>
 {#if showAddNoteModal}
-<Modal {showAddNoteModal}  on:cancel title={APP_CONSTANTS.MODAL_DATA.ADD_NOTE.MODAL_TITLE}>
+<Modal {showAddNoteModal}  on:cancel title={ADD_NOTE.MODAL_TITLE}>
     <form on:submit|preventDefault={addNewNote}>
        <div>
         <TextInput
@@ -51,9 +55,9 @@
         placeholder="Note Title"
         value={title}
         requiredTitle={titleRequired}
-        errorMessageTitle={APP_CONSTANTS.ERROR_MESSAGES.ADD_NOTE.NOTE_TITLE.TITLE_REQUIRED_ERROR}
+        errorMessageTitle={ERROR_MESSAGES.NOTE_TITLE.TITLE_REQUIRED_ERROR}
         requiredTitleMaxLength={titleMaxLengthRequired}
-        errorMessageTitleMaxLength={APP_CONSTANTS.ERROR_MESSAGES.ADD_NOTE.NOTE_TITLE.TITLE_MAX_LENGTH_ERROR}
+        errorMessageTitleMaxLength={ERROR_MESSAGES.NOTE_TITLE.TITLE_MAX_LENGTH_ERROR}
         on:input={(event) => title = event.target.value}
     />
        </div>
@@ -66,9 +70,9 @@
         value={description}
         rows={7}
         requiredDescription={descriptionRequired}
-        errorMessageDescription={APP_CONSTANTS.ERROR_MESSAGES.ADD_NOTE.NOTE_DESCRIPTION.DESCRIPTION_REQUIRED_ERROR}
+        errorMessageDescription={ERROR_MESSAGES.NOTE_DESCRIPTION.DESCRIPTION_REQUIRED_ERROR}
         requiredDescriptionMaxLength={descriptionMaxLengthRequired}
-        errorMessageDescriptionMaxLength={APP_CONSTANTS.ERROR_MESSAGES.ADD_NOTE.NOTE_DESCRIPTION.DESCRIPTION_MAX_LENGTH_ERROR}
+        errorMessageDescriptionMaxLength={ERROR_MESSAGES.NOTE_DESCRIPTION.DESCRIPTION_MAX_LENGTH_ERROR}
         on:input={(event) => description = event.target.value}
     />
    
@@ -78,11 +82,10 @@
         value={selectedColor}
         on:input={(event) => selectedColor = event.target.value}
         />
-       
     </form>    
     <div slot="footer">
-        <Button type="button" className="btn btn-md" on:click={cancelModal}>{APP_CONSTANTS.MODAL_DATA.ADD_NOTE.BUTTON_LABELS.CANCEL}</Button>
-        <Button type="button"  className="btn btn-md btn-danger" on:click={addNewNote} disabled={!isFormValid}>{APP_CONSTANTS.MODAL_DATA.ADD_NOTE.BUTTON_LABELS.ADD_NOTE}</Button>
+        <Button type="button" className="btn btn-md  mr-2" on:click={cancelModal}>{BUTTON_LABELS.CANCEL}</Button>
+        <Button type="button"  className="btn btn-md btn-danger" on:click={addNewNote} disabled={!isFormValid}>{BUTTON_LABELS.ADD_NOTE}</Button>
     </div>
 </Modal>
 

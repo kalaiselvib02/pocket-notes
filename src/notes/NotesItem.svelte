@@ -6,8 +6,8 @@
 
    export let notes = [];
    export let showDeleteNoteModal;
-   let deletedId = null
-   const dispatch = new createEventDispatcher(); 
+   let deletedId = null;
+   const BUTTON_LABELS = APP_CONSTANTS.MODAL_DATA.DELETE_NOTE.BUTTON_LABELS;
 
    function cancelModal(){
      showDeleteNoteModal = false
@@ -17,7 +17,6 @@
         notes = newNotes;
         showDeleteNoteModal = false
         localStorage.setItem("notes", JSON.stringify(notes));
-        
         }
  
 </script>
@@ -44,8 +43,8 @@
 {#if showDeleteNoteModal}
 <Modal {showDeleteNoteModal}  title={APP_CONSTANTS.MODAL_DATA.DELETE_NOTE.MODAL_TITLE}>
    <div slot="footer">
-      <Button type="button" className="btn btn-md" on:click={cancelModal}>{APP_CONSTANTS.MODAL_DATA.DELETE_NOTE.BUTTON_LABELS.NO}</Button>
-      <Button type="button"  className="btn btn-md btn-danger" on:click = {deleteNote(deletedId)}>{APP_CONSTANTS.MODAL_DATA.DELETE_NOTE.BUTTON_LABELS.YES}</Button>
+      <Button type="button" className="btn btn-md mr-2" on:click={cancelModal}>{BUTTON_LABELS.NO}</Button>
+      <Button type="button"  className="btn btn-md btn-danger" on:click = {deleteNote(deletedId)}>{BUTTON_LABELS.YES}</Button>
    </div>
 </Modal>
 {/if}

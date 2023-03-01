@@ -17,6 +17,7 @@ export let disabled = false
 button:disabled,
 button[disabled]{
   opacity: 0.6;
+  cursor: not-allowed;
 }
    /** End of btn-danger **/
 </style>

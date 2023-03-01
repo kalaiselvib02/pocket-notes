@@ -62,14 +62,17 @@ export const APP_CONSTANTS = {
         ADD_NOTE :   {
             NOTE_TITLE : {
                 TITLE_REQUIRED_ERROR: "Please enter note title",
-                TITLE_MAX_LENGTH_ERROR : "Please enter note title less than 60 characters"
+                TITLE_MAX_LENGTH_ERROR : "Please enter note title less than 60 characters",
+                TITLE_MAX_LENGTH:60,
             },
             NOTE_DESCRIPTION : {
                 DESCRIPTION_REQUIRED_ERROR: "Please enter note description",
-                DESCRIPTION_MAX_LENGTH_ERROR : "Please enter note description less than 255 characters"
+                DESCRIPTION_MAX_LENGTH_ERROR : "Please enter note description less than 255 characters",
+                DESCRIPTION_MAX_LENGTH:255
             }
         }
-    }
+    },
+    
 
    
 }
