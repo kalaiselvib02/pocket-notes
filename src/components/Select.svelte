@@ -1,12 +1,22 @@
 <script>
+import {layoutSelectionVal} from "../stores/store"
 export let options;
 export let selectedLayout;
+ 
+let layoutValue = localStorage.getItem("layout") || "five-col-layout"
+
+$:layoutSelectionVal.set(layoutValue)
+
+
 
 
 
 </script>
 
-<select bind:value={selectedLayout}>
+<select bind:value={$layoutSelectionVal} on:change={() => {
+
+localStorage.setItem("layout" , $layoutSelectionVal);
+}}>
 {#each options as option}
 <option key={option.CLASS_NAME} value={option.CLASS_NAME}>{option.LABEL}</option>
 {/each}

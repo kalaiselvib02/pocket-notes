@@ -6,6 +6,7 @@
   import Header from "./components/Header.svelte";
   import NotesItem from "./notes/NotesItem.svelte";
   import Button from "./components/Button.svelte";
+  import {layoutSelectionVal} from "./stores/store"
   export let showAddNoteModal = false;
   export let showDeleteNoteModal = false;
   
@@ -18,16 +19,13 @@
   const MONTH_VAL = TODAYS_DATE.toLocaleString('en-us', {
       month: 'short'
   });
+ 
+  $:console.log({$layoutSelectionVal})
   
-  let notes = JSON.parse(localStorage.getItem("notes") || "[]");
-  let selectedLayout;
+ let notes = JSON.parse(localStorage.getItem("notes") || "[]");
 
 
-  let layoutVal = localStorage.getItem("layout")
-
-  // let testClass = localStorage.getItem('layout');
-
-  
+ 
   function addNewNote(event) {
           let newNote = {
               id: nanoid(),
@@ -42,14 +40,14 @@
      
   }
   
- 
-  
   function cancelModal() {
       showAddNoteModal = false;
   }
+
+  $:console.log($layoutSelectionVal)
   </script>
-  <Header bind:selectedLayout/>
-  <div class="notes-wrapper container {selectedLayout}" >
+  <Header bind:$layoutSelectionVal/>
+  <div class="notes-wrapper container {$layoutSelectionVal}" >
     
         <button class="add-note-btn" id="add-note-btn" on:click={() => {
         showAddNoteModal = true
