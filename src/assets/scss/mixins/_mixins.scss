@@ -1,0 +1,33 @@
+
+
+
+/** Start of mixin : flex-betweem **/
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/** End of mixin : flex-betweem **/
+/** Start of mixin : flex-center **/
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/** Start of mixin : flex-center **/
+/** Start of mixin : grid-container **/
+@mixin grid-container($columnFormat , $grid-row-value , $grid-gap) {
+    display: grid;
+    grid-template-columns: repeat($columnFormat, 1fr);
+    grid-template-rows: $grid-row-value;
+    grid-gap: $grid-gap;
+}
+/** Start of mixin : grid-container **/
+/** Start of mixin : para-truncate **/
+@mixin para-truncate($width){
+    width: $width;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/** Start of mixin : para-truncate **/
